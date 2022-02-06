@@ -1,0 +1,76 @@
+@import '@/assets/scss/_breakpoints.scss';
+
+:root{
+    --spacing-small: 6px;
+    --spacing-normal: 12px;
+    --spacing-large: 24px;
+    --spacing-larger: 48px;
+
+    --icon-font-size: 32px; 
+    --icon-font-line-height: 40px;
+
+    --hero-font-size: 48px;
+    --hero-font-line-height: 64px;
+
+    --subtitle-font-size: 21px;
+    --subtitle-font-line-height: 28px;
+
+    --body-text-font-size: 16px;
+    --body-text-font-line-height: 21px;
+
+    @include for-tablet-portrait-up{
+        --icon-font-size: 64px;
+        --icon-font-line-height: 81px;
+
+        --hero-font-size: 64px;
+        --hero-font-line-height: 85px;
+    }
+}
+
+$dark: #514A4A;
+$light: #CED2D2;
+
+.icon-font{
+    font-family: Dosis;
+    font-style: normal;
+    font-weight: normal;
+    font-size: var(--icon-font-size);
+    line-height: var(--icon-font-line-height);
+
+    color: $dark;
+}
+
+.hero-font{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: var(--hero-font-size);
+    line-height: var(--hero-font-line-height);
+
+    color: $dark;
+}
+
+.subtitle-font{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: var(--subtitle-font-size);
+    line-height: var(--subtitle-font-line-height);
+    text-transform: capitalize;
+
+    color: $dark;
+}
+
+.body-text{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 300;
+    font-size: var(--body-text-font-size);
+    line-height: var(--body-text-font-line-height);
+
+    color: $dark;
+}
+
+.light-color{
+    color: $light;
+}
