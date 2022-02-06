@@ -2,19 +2,7 @@
     <div class="frame">
         <h1 class="icon-area icon-font">QZ</h1>
         <TopBar />
-        <div class="left-bar">
-            <div class="icon-box">
-                <Icon size="32" color="#514A4A">
-                    <Linkedin />
-                </Icon>
-                <Icon size="32" color="#514A4A">
-                    <FirefoxBrowser />
-                </Icon>
-                <Icon size="32" color="#514A4A">
-                    <Github />
-                </Icon>
-            </div>
-        </div>
+        <LeftBar />
         <div class="content-area"></div>
     </div>
 </template>
@@ -51,44 +39,20 @@
         justify-content: center;
         align-items: center;
     }
-    .icon-box{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        row-gap: var(--spacing-normal);
-        
-        margin-bottom: var(--spacing-large);
-    }
-
-    .left-bar{
-        grid-area: left-bar;
-        border-left: 1px solid $dark;
-        border-right: 1px solid $dark;
-        border-bottom: 1px solid $dark;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
+    
 </style>
 
 <script>
 import {isMobile,isTablet,isDesktop} from '@/js/breakpoints.js';
-import TopBar from '@/components/TopBar.vue';
 
-import {Icon} from '@vicons/utils';
-import Linkedin from '@vicons/fa/Linkedin'
-import FirefoxBrowser from '@vicons/fa/FirefoxBrowser'
-import Github from '@vicons/fa/Github'
+import TopBar from '@/components/TopBar.vue';
+import LeftBar from '@/components/LeftBar.vue';
 
 export default {
     name: "App",
     components:{
         TopBar,
-        Icon,
-        Linkedin,
-        FirefoxBrowser,
-        Github
+        LeftBar
     },
     data(){
         return{
