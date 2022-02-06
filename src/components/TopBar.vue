@@ -19,7 +19,10 @@
 
     .top-bar{
         grid-area: top-bar;
-        border: 1px solid $dark;
+        border-top: 1px solid $dark;
+        border-right: 1px solid $dark;
+        border-bottom: 1px solid $dark;
+
         padding: 0 var(--spacing-large);
 
         display: flex;
