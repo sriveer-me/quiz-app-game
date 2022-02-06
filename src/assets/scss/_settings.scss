@@ -41,14 +41,43 @@ $light: #CED2D2;
 }
 
 .hero-font{
+    transition: 0.25s color ease-in-out,
+                0.25s text-shadow ease-in-out;
+
     font-family: Segoe UI;
     font-style: normal;
     font-weight: bold;
     font-size: var(--hero-font-size);
     line-height: var(--hero-font-line-height);
 
+    color: white;
+    text-shadow:
+        -1px -1px 0 $dark,  
+         1px -1px 0 $dark,
+        -1px  1px 0 $dark,
+         1px  1px 0 $dark;
+    
+    &.filled-in{
+        text-shadow:
+            -1px -1px 0 #fff,  
+             1px -1px 0 #fff,
+            -1px  1px 0 #fff,
+             1px  1px 0 #fff;
+
+        color: $dark;
+    }
+}
+.hero-font:hover{
+    text-shadow:
+        -1px -1px 0 #fff,  
+         1px -1px 0 #fff,
+        -1px  1px 0 #fff,
+         1px  1px 0 #fff;
+
     color: $dark;
 }
+
+
 
 .subtitle-font{
     font-family: Segoe UI;
