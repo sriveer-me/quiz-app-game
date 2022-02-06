@@ -9,6 +9,7 @@
 
 <style lang="scss">
     @import '@/assets/scss/reset.scss';
+    @import '@/assets/scss/_font.scss';
     @import '@/assets/scss/_settings.scss';
     @import '@/assets/scss/_breakpoints.scss';
 
