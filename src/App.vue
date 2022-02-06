@@ -51,6 +51,14 @@
         justify-content: center;
         align-items: center;
     }
+    .icon-box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: var(--spacing-normal);
+        
+        margin-bottom: var(--spacing-large);
+    }
 
     .left-bar{
         grid-area: left-bar;
