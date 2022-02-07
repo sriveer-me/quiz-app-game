@@ -10,6 +10,8 @@
             </div>
             <div class="answer-options">
                 <Checkbox name="answers" value="answer-1" labelName="Hanna"/>
+                <Checkbox name="answers" value="answer-2" labelName="Byzantium"/>
+                <Checkbox name="answers" value="answer-3" labelName="Alexandria"/>
             </div>
         </div>
     </div>
