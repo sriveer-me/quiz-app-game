@@ -12,7 +12,12 @@
                 <Checkbox name="answers" value="answer-3" labelName="Alexandria"/>
             </div>
         </div>
-        <div class="next-button"></div>
+        <div class="next-button">
+            <h1 class="subtitle-font light-color">Next</h1>
+            <Icon size="32" color="#fff">
+                <ArrowRight />
+            </Icon>
+        </div>
     </div>
 </template>
 
@@ -93,15 +98,26 @@
             height: 75px;
         }
         @include for-desktop-up{
-            width: 300px;
+            width: 128px;
             justify-self: end;
         }
 
-        background-color: $dark;
+        background-color: #000;
         align-self: end;
         margin: var(--spacing-small);
+        @include for-tablet-portrait-up{
+            margin: var(--spacing-small) var(--spacing-small) 0 var(--spacing-small);
+        }
 
         border-radius: 3px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-normal);
+
+        cursor: pointer;
     }
     
 </style>
@@ -113,12 +129,18 @@ import TopBar from '@/components/TopBar.vue';
 import LeftBar from '@/components/LeftBar.vue';
 import Checkbox from '@/components/Checkbox.vue';
 
+import {Icon} from '@vicons/utils';
+import ArrowRight from '@vicons/fa/ArrowRight';
+
 export default {
     name: "App",
     components:{
         TopBar,
         LeftBar,
-        Checkbox
+        Checkbox,
+
+        Icon,
+        ArrowRight
     },
     data(){
         return{
