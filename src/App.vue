@@ -59,6 +59,14 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        height: calc(100vh - 112px);
+        overflow-y: auto;
+
+        @include for-tablet-portrait-up{
+            height: auto;
+            overflow-y: hidden;
+        }
     }
 
     .question{
