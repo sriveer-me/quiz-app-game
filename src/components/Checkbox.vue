@@ -13,12 +13,14 @@
         cursor: pointer;
         display: inline-flex;
         align-items: center;
+        column-gap: var(--spacing-small);
     }
     
     input[type="radio"]{
         transition: 0.25s background-color ease-in-out;
         appearance: none;
         
+        margin: 0;
         width: 48px;
         height: 48px;
         @include for-tablet-portrait-up{

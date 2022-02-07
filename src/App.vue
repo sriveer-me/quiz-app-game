@@ -7,13 +7,12 @@
             <div class="question">
                 <h1 class="subtitle-font">Q1.What was the capital of the roman diocese of the east?</h1>
                 <h2 class="body-text">The Diocese of the East (Latin: Dioecesis Orientis; Greek: Διοίκησις Ἑῴα) was a diocese of the later Roman Empire, incorporating the provinces of the western Middle East, between the Mediterranean Sea and Mesopotamia. During late Antiquity, it was one of the major commercial, agricultural, religious and intellectual areas of the empire, and its strategic location facing the Sassanid Empire and the unruly desert tribes gave it exceptional military importance.</h2>
-            </div>
-            <div class="answer-options">
-                <Checkbox name="answers" value="answer-1" labelName="Hanna"/>
+                <Checkbox class="first-box" name="answers" value="answer-1" labelName="Hanna"/>
                 <Checkbox name="answers" value="answer-2" labelName="Byzantium"/>
                 <Checkbox name="answers" value="answer-3" labelName="Alexandria"/>
             </div>
         </div>
+        <div class="next-button"></div>
     </div>
 </template>
 
@@ -53,14 +52,47 @@
     //relating to content-area start
 
     .content-area{
-        padding-top: var(--spacing-large);
-        padding-left: var(--spacing-small);
-        padding-right: var(--spacing-small);
+        grid-area: content-area;
+        padding: var(--spacing-large) var(--spacing-small);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
+
     .question{
         display: flex;
         flex-direction: column;
         row-gap: var(--spacing-small);
+
+        @include for-desktop-up{
+            max-width: 100ch;
+        }
+
+        .first-box{
+            margin-top: var(--spacing-large);
+        }
+    }
+   
+
+    //relating to next button
+    .next-button{
+        grid-area: content-area;
+        height: 50px;
+        @include for-tablet-portrait-up{
+            height: 75px;
+        }
+        @include for-desktop-up{
+            width: 300px;
+            justify-self: end;
+        }
+
+        background-color: $dark;
+        align-self: end;
+        margin: var(--spacing-small);
+
+        border-radius: 3px;
     }
     
 </style>
