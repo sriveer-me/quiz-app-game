@@ -53,12 +53,12 @@
 
     .content-area{
         grid-area: content-area;
-        padding: var(--spacing-large) var(--spacing-small);
+        padding: 0 var(--spacing-small);
 
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        // justify-content: center;
+        // align-items: center;
 
         height: calc(100vh - 112px);
         overflow-y: auto;
@@ -70,6 +70,7 @@
     }
 
     .question{
+        margin: auto;
         display: flex;
         flex-direction: column;
         row-gap: var(--spacing-small);
