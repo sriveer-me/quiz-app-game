@@ -10,6 +10,7 @@
                 <Checkbox class="first-box" name="answers" value="answer-1" labelName="Hanna"/>
                 <Checkbox name="answers" value="answer-2" labelName="Byzantium"/>
                 <Checkbox name="answers" value="answer-3" labelName="Alexandria"/>
+                <InputBox />
             </div>
         </div>
         <div class="next-button">
@@ -128,6 +129,7 @@ import {isMobile,isTablet,isDesktop} from '@/js/breakpoints.js';
 import TopBar from '@/components/TopBar.vue';
 import LeftBar from '@/components/LeftBar.vue';
 import Checkbox from '@/components/Checkbox.vue';
+import InputBox from '@/components/InputBox.vue';
 
 import {Icon} from '@vicons/utils';
 import ArrowRight from '@vicons/fa/ArrowRight';
@@ -138,6 +140,7 @@ export default {
         TopBar,
         LeftBar,
         Checkbox,
+        InputBox,
 
         Icon,
         ArrowRight
