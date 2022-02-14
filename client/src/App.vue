@@ -7,10 +7,10 @@
             <div class="question">
                 <h1 class="subtitle-font">Q1.What was the capital of the roman diocese of the east?</h1>
                 <h2 class="body-text">The Diocese of the East (Latin: Dioecesis Orientis; Greek: Διοίκησις Ἑῴα) was a diocese of the later Roman Empire, incorporating the provinces of the western Middle East, between the Mediterranean Sea and Mesopotamia. During late Antiquity, it was one of the major commercial, agricultural, religious and intellectual areas of the empire, and its strategic location facing the Sassanid Empire and the unruly desert tribes gave it exceptional military importance.</h2>
-                <Checkbox class="first-box" name="answers" value="answer-1" labelName="Hanna"/>
+                <Checkbox class="first-box" name="answers" value="answer-1" labelName="Antioch"/>
                 <Checkbox name="answers" value="answer-2" labelName="Byzantium"/>
                 <Checkbox name="answers" value="answer-3" labelName="Alexandria"/>
-                <InputBox />
+                <Checkbox name="answers" value="answer-3" labelName="Ctesiphon"/>
             </div>
         </div>
         <div class="next-button">
