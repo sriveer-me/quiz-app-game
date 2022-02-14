@@ -1,16 +1,18 @@
 <template>
-     <div class="loader"></div> 
+    <div class="loader-wrapper">
+      <div class="loader"></div>
+    </div> 
 </template>
 
 <style lang="scss" scoped>
 @import '@/assets/scss/_settings.scss';
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid $dark;
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid $dark;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 64px;
+  height: 64px;
   animation: spin 2s linear infinite;
 }
 

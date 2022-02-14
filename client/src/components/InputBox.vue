@@ -6,10 +6,32 @@
                 <label class="body-text">Your Name</label>
         </fieldset>
         <div class="icon-box">
-            <Icon size="64" class="go-button">
-                <ArrowRight />
-            </Icon>
-            <LoadingIcon />
+            
+            <Transition
+                enter-active-class="animate__animated animate__fadeInLeft"
+                leave-active-class="animate__animated animate__fadeOutRight"
+            >
+                <Icon size="64" color="#514A4A" class="go-button" v-show="state === 'ready'" @click="goClicked">
+                    <ArrowRight />
+                </Icon>
+            </Transition>
+
+            <Transition
+                enter-active-class="animate__animated animate__fadeInLeft"
+                leave-active-class="animate__animated animate__fadeOutRight"
+            >
+                <LoadingIcon v-show="state === 'loading'"/>
+            </Transition>
+
+			<Transition
+                enter-active-class="animate__animated animate__fadeIn"
+                leave-active-class="animate__animated animate__fadeOutRight"
+            >
+                <Icon size="64" color="#514A4A" class="go-button" v-show="state === 'finished'" @click="goClicked">
+                    <FinishedIcon />
+                </Icon>
+            </Transition>
+
         </div>
     </div>
 </template>
@@ -18,18 +40,40 @@
 import {Icon} from '@vicons/utils';
 import ArrowRight from '@vicons/material/ArrowRightAltSharp';
 import LoadingIcon from '@/components/LoadingIcon.vue';
+import FinishedIcon from '@vicons/fa/CheckCircle';
 
 export default {
     name: "InputBox",
     components:{
         Icon,
-        ArrowRight,
-        LoadingIcon
+        ArrowRight,        
+        LoadingIcon,
+        FinishedIcon
     },
     data(){
         return {
-            name: "noName"
+            name: "noName",
+            state: "ready"
         }
+    },
+    methods:{
+        goClicked(){
+            this.state = "transition";
+            setTimeout(function(){
+                this.state = "loading"
+            }.bind(this),2000)
+
+			setTimeout(function(){
+				this.state = "transition"
+			}.bind(this),5000)
+
+			setTimeout(function(){
+				this.state = "finished"
+			}.bind(this),7000)
+        }
+    },
+    beforeMount(){
+        // this.icon = ReadyIcon;
     }
 }
 </script>
@@ -48,6 +92,10 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+	
+	max-width: 64px;
+	min-width: 64px;
+	overflow-x: hidden;
 }
 
 
