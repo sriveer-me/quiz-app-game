@@ -4,16 +4,9 @@
         <TopBar />
         <LeftBar />
         <div class="content-area">
-            <div class="question">
-                <h1 class="subtitle-font">Q1.What was the capital of the roman diocese of the east?</h1>
-                <h2 class="body-text">The Diocese of the East (Latin: Dioecesis Orientis; Greek: Διοίκησις Ἑῴα) was a diocese of the later Roman Empire, incorporating the provinces of the western Middle East, between the Mediterranean Sea and Mesopotamia. During late Antiquity, it was one of the major commercial, agricultural, religious and intellectual areas of the empire, and its strategic location facing the Sassanid Empire and the unruly desert tribes gave it exceptional military importance.</h2>
-                <Checkbox class="first-box" name="answers" value="answer-1" labelName="Antioch"/>
-                <Checkbox name="answers" value="answer-2" labelName="Byzantium"/>
-                <Checkbox name="answers" value="answer-3" labelName="Alexandria"/>
-                <Checkbox name="answers" value="answer-3" labelName="Ctesiphon"/>
-            </div>
+            <MCQ ref="questionRef"/>
         </div>
-        <div class="next-button">
+        <div class="next-button" @click="nextClicked">
             <h1 class="subtitle-font light-color">Next</h1>
             <Icon size="32" color="#fff">
                 <ArrowRight />
@@ -75,22 +68,6 @@
         }
     }
 
-    .question{
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        row-gap: var(--spacing-small);
-
-        @include for-desktop-up{
-            max-width: 100ch;
-        }
-
-        .first-box{
-            margin-top: var(--spacing-large);
-        }
-    }
-   
-
     //relating to next button
     .next-button{
         grid-area: content-area;
@@ -128,8 +105,7 @@ import {isMobile,isTablet,isDesktop} from '@/js/breakpoints.js';
 
 import TopBar from '@/components/TopBar.vue';
 import LeftBar from '@/components/LeftBar.vue';
-import Checkbox from '@/components/Checkbox.vue';
-import InputBox from '@/components/InputBox.vue';
+import MCQ from '@/components/MultipleChoiceQuestion.vue';
 
 import {Icon} from '@vicons/utils';
 import ArrowRight from '@vicons/fa/ArrowRight';
@@ -139,8 +115,7 @@ export default {
     components:{
         TopBar,
         LeftBar,
-        Checkbox,
-        InputBox,
+        MCQ,
 
         Icon,
         ArrowRight
@@ -170,6 +145,10 @@ export default {
                 this.isDesktop = true;
             }
             else console.log('for some reason this device is detected as not a mobile,tablet or desktop');
+        },
+
+        nextClicked(){
+            this.$refs.questionRef.getSelectedAnswer();
         }
     },
      created(){
