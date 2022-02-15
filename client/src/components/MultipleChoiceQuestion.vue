@@ -16,6 +16,16 @@ export default {
     components:{
         Checkbox
     },
+    props:{
+        question:{
+            default: "Question Placeholder",
+            type: String
+        },
+        questionContext:{
+            default: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor est voluptate enim, atque provident explicabo. Velit voluptate molestiae doloribus fugit! Laudantium soluta, nam atque earum quos expedita voluptates hic dolore excepturi veritatis voluptatibus eveniet explicabo laboriosam enim ex eos cumque voluptas quibusdam est temporibus suscipit a necessitatibus. Beatae commodi esse ducimus, distinctio quae maiores facilis perferendis laboriosam, omnis reprehenderit veritatis.",
+            type: String
+        }
+    },
     data(){
         return {
             getSelectedAnswer(){
