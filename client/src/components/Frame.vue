@@ -1,7 +1,7 @@
 <template>
     <div class="frame">
         <h1 class="icon-area icon-font">QZ</h1>
-        <TopBar :timerValue="gameTimeString"/>
+        <TopBar :timerValue="gameTimeString" :gameScore="gameScore"/>
         <LeftBar />
         <div class="content-area">
             <MCQ
@@ -157,6 +157,7 @@ export default {
             gameStarted: false,
             gameTimer: new Timer(),
             gameTimeString: "00:00",
+            gameScore: 0,
 
             question: "this is a test question",
             questionContext: "this is a test question context",
@@ -209,6 +210,13 @@ export default {
 
             //game is running.. 
             //step-1 calculate score
+            if(selectedAnswer === this.correctOption){
+                if(this.gameScore === 9)
+                    console.log('game end')
+                else this.gameScore++;
+            }
+            else if(this.gameScore != 0)
+                this.gameScore--;
 
             //step-2 update to new question
             this.updateQuestion();

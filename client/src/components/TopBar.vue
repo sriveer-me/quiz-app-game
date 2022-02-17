@@ -7,7 +7,7 @@
         <div class="top-bar-box score-box">
             <h2 class="subtitle-font">Score</h2>
             <div class="score-box__internal">
-                <h3 class="subtitle-font light-color">0</h3>
+                <h3 class="subtitle-font light-color">{{gameScore}}</h3>
             </div>
         </div>
     </div>
@@ -20,6 +20,10 @@ export default {
         timerValue:{
             default: "00:00",
             type: String
+        },
+        gameScore:{
+            default: 0,
+            type: Number
         }
     },
 }
