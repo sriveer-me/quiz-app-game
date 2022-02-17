@@ -2,9 +2,9 @@
     <div class="question">
         <h1 class="subtitle-font"><span v-show="showQuestionNumber">Q{{questionNumber}}.</span>{{question}}</h1>
         <h2 class="body-text">{{questionContext}}</h2>
-        <Checkbox class="first-box" name="answers" value="1" :labelName="label1" ref="checkboxRef"/>
-        <Checkbox name="answers" value="2" :labelName="label2"/>
-        <Checkbox name="answers" value="3" :labelName="label3"/>
+        <Checkbox class="first-box" name="answers" value="1" :labelName="label1" ref="checkbox1"/>
+        <Checkbox name="answers" value="2" :labelName="label2" ref="checkbox2"/>
+        <Checkbox name="answers" value="3" :labelName="label3" ref="checkbox3"/>
     </div>
 </template>
 
@@ -45,10 +45,17 @@ export default {
     },
     data(){
         return {
-            questionNumber: 0
+            questionNumber: 0,
+            checkboxes: []
         }
     },
     methods: {
+        checkBoxAdded(ele){
+            if(this.che)
+            this.checkboxes.push(ele);
+
+        },
+
         //this method returns null if no option is selected or either 1,2,3 depending on the option selected.
         getSelectedAnswer(){
             let answers = this.$el.querySelectorAll('input[type=radio]');
@@ -61,6 +68,11 @@ export default {
             })
             answer = answer[0] || null;
             return answer;
+        },
+        clearSelection(){
+            this.$refs.checkbox1.clear();
+            this.$refs.checkbox2.clear();
+            this.$refs.checkbox3.clear();
         }
     },
     watch: {

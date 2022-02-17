@@ -4,12 +4,14 @@
         <TopBar :timerValue="gameTimeString" :gameScore="gameScore"/>
         <LeftBar />
         <div class="content-area">
-            <MCQ
-                :showQuestionNumber="gameStarted"
-                :question="question" :questionContext="questionContext" 
-                :label1="option1" :label2="option2" :label3="option3"
-                ref="questionRef"
-            />
+            <transition enter-active-class="animate__fadeIn" enter-leave-class="animate__fadeOut">
+                <MCQ
+                    :showQuestionNumber="gameStarted"
+                    :question="question" :questionContext="questionContext" 
+                    :label1="option1" :label2="option2" :label3="option3"
+                    ref="questionRef"
+                />
+            </transition>
         </div>
         <div class="next-button" @click="nextClicked">
             <h1 class="subtitle-font light-color">Next</h1>
@@ -159,6 +161,7 @@ export default {
             gameTimeString: "00:00",
             gameScore: 0,
 
+            showQuestion: true,
             question: "this is a test question",
             questionContext: "this is a test question context",
             option1: "option-1",
@@ -205,6 +208,7 @@ export default {
                 //start the game here
                 this.gameTimer.reset();
                 this.updateQuestion();
+                this.$refs.questionRef.clearSelection();
                 this.gameStarted = true;
             }
 
@@ -212,17 +216,23 @@ export default {
             //step-1 calculate score
             if(selectedAnswer === this.correctOption){
                 if(this.gameScore === 9)
-                    console.log('game end')
+                    this.endGame();
                 else this.gameScore++;
             }
             else if(this.gameScore != 0)
                 this.gameScore--;
 
             //step-2 update to new question
+            this.$refs.questionRef.clearSelection();
             this.updateQuestion();
+        },
+        endGame(){
+            console.log('game end')
         },
 
         updateQuestion(){
+            this.showQuestion = false;
+
             let randNumber = parseInt(this.randomNumberInRange(0,easyQuestions.length));
             this.question = easyQuestions[randNumber].question;
             this.questionContext = easyQuestions[randNumber].questionContext;

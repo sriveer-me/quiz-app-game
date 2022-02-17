@@ -117,6 +117,13 @@ export default {
 
             let heroFont = this.$el.querySelector('.hero-font');
             heroFont.classList.add('filled-in');
+        },
+        clear(){
+            let checkBox = this.$el.querySelector('input[type="radio"]');
+            checkBox.checked = false;
+
+            let heroFont = this.$el.querySelector('.hero-font');
+            heroFont.classList.remove('filled-in');
         }
     }
 }
