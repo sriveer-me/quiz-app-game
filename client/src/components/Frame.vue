@@ -1,7 +1,7 @@
 <template>
     <div class="frame">
         <h1 class="icon-area icon-font">QZ</h1>
-        <TopBar />
+        <TopBar :timerValue="gameTimeString"/>
         <LeftBar />
         <div class="content-area">
             <MCQ
@@ -116,6 +116,8 @@ import ArrowRight from '@vicons/fa/ArrowRight';
 import { defineComponent, h } from "vue";
 import { NAlert, useMessage } from "naive-ui";
 
+import { Timer } from "easytimer.js";
+
 const renderMessage = (props) => {
   const { type } = props;
   return h(NAlert, {
@@ -151,6 +153,9 @@ export default {
             isDesktop: false,
 
             gameStarted: false,
+            gameTimer: new Timer(),
+            gameTimeString: "00:00",
+
             question: "this is a test question",
             questionContext: "this is a test question context",
             option1: "option-1",
@@ -186,7 +191,6 @@ export default {
 
             if(this.gameStarted === false){
                 if(selectedAnswer === null){
-                    console.log('test')
                     this.message.error('An option has to be selected to start the game. please try selecting a relevant option using the checkboxes provided.',{
                         render: renderMessage,
                         closable: true
@@ -195,7 +199,8 @@ export default {
                 }
                 
                 //start the game here
-
+                this.gameTimer.reset();
+                this.gameStarted = true;
             }
             // this.question = "next " + this.question;
             // this.questionContext = "next " + this.questionContext;
@@ -214,6 +219,10 @@ export default {
         this.option1 = "Easy"
         this.option2 = "Aurelian"
         this.option3 = "Majorian"
+
+        this.gameTimer.addEventListener("secondsUpdated", function (e) {
+            this.gameTimeString = `${this.gameTimer.getTimeValues().minutes.toString().padStart(2,0)}:${this.gameTimer.getTimeValues().seconds.toString().padStart(2,0)}`
+        }.bind(this));
     }
 }
 </script>

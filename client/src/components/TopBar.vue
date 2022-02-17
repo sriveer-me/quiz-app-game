@@ -2,7 +2,7 @@
     <div class="top-bar">
         <div class="top-bar-box time-box">
             <h2 class="subtitle-font">Time</h2>
-            <h3 class="body-text">0:00</h3>
+            <h3 class="body-text">{{timerValue}}</h3>
         </div>
         <div class="top-bar-box score-box">
             <h2 class="subtitle-font">Score</h2>
@@ -12,6 +12,18 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: "Top Bar",
+    props:{
+        timerValue:{
+            default: "00:00",
+            type: String
+        }
+    },
+}
+</script>
 
 <style lang="scss">
     @import '@/assets/scss/_settings.scss';
