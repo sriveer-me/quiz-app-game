@@ -118,6 +118,8 @@ import { NAlert, useMessage } from "naive-ui";
 
 import { Timer } from "easytimer.js";
 
+import {easyQuestions} from '@/json/Questions.js';
+
 const renderMessage = (props) => {
   const { type } = props;
   return h(NAlert, {
@@ -161,6 +163,7 @@ export default {
             option1: "option-1",
             option2: "option-2 ",
             option3: "option-3",
+            correctOption: null,
 
             message: useMessage()
         }
@@ -200,14 +203,31 @@ export default {
                 
                 //start the game here
                 this.gameTimer.reset();
+                this.updateQuestion();
                 this.gameStarted = true;
             }
-            // this.question = "next " + this.question;
-            // this.questionContext = "next " + this.questionContext;
-            // this.option1 = "next " + this.option1;
-            // this.option2 = "next " + this.option2;
-            // this.option3 = "next " + this.option3;
+
+            //game is running.. 
+            //step-1 calculate score
+
+            //step-2 update to new question
+            this.updateQuestion();
+        },
+
+        updateQuestion(){
+            let randNumber = parseInt(this.randomNumberInRange(0,easyQuestions.length));
+            this.question = easyQuestions[randNumber].question;
+            this.questionContext = easyQuestions[randNumber].questionContext;
+            this.option1 = easyQuestions[randNumber].options[0];
+            this.option2 = easyQuestions[randNumber].options[1];
+            this.option3 = easyQuestions[randNumber].options[2];
+            this.correctOption = easyQuestions[randNumber].correctOption;
+        },
+
+        randomNumberInRange(min, max) {
+            return Math.random() * (max - min) + min;
         }
+
     },
      created(){
         this.checkDevice();
