@@ -113,7 +113,25 @@ import MCQ from '@/components/MultipleChoiceQuestion.vue';
 import {Icon} from '@vicons/utils';
 import ArrowRight from '@vicons/fa/ArrowRight';
 
-import { useMessage } from 'naive-ui'
+import { defineComponent, h } from "vue";
+import { NAlert, useMessage } from "naive-ui";
+
+const renderMessage = (props) => {
+  const { type } = props;
+  return h(NAlert, {
+    closable: props.closable,
+    onClose: props.onClose,
+    type: type === "loading" ? "default" : type,
+    title: "Please Select A Valid Option",
+    style: {
+      boxShadow: "var(--n-box-shadow)",
+      maxWidth: "calc(100vw - 32px)",
+      width: "480px"
+    }
+  }, {
+    default: () => props.content
+  });
+};
 
 export default {
     name: "Frame",
@@ -123,7 +141,8 @@ export default {
         MCQ,
 
         Icon,
-        ArrowRight
+        ArrowRight,
+        NAlert
     },
     data(){
         return{
@@ -168,7 +187,10 @@ export default {
             if(this.gameStarted === false){
                 if(selectedAnswer === null){
                     console.log('test')
-                    this.message.error('I dont know why nobody told you how to unfold your love')
+                    this.message.error('An option has to be selected to start the game. please try selecting a relevant option using the checkboxes provided.',{
+                        render: renderMessage,
+                        closable: true
+                    })
                     return;
                 }
                 
