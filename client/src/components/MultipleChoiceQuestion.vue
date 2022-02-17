@@ -1,10 +1,10 @@
 <template>
     <div class="question">
-        <h1 class="subtitle-font">Q1.What was the capital of the roman diocese of the east?</h1>
-        <h2 class="body-text">The Diocese of the East (Latin: Dioecesis Orientis; Greek: Διοίκησις Ἑῴα) was a diocese of the later Roman Empire, incorporating the provinces of the western Middle East, between the Mediterranean Sea and Mesopotamia. During late Antiquity, it was one of the major commercial, agricultural, religious and intellectual areas of the empire, and its strategic location facing the Sassanid Empire and the unruly desert tribes gave it exceptional military importance.</h2>
-        <Checkbox class="first-box" name="answers" value="1" labelName="Antioch" ref="checkboxRef"/>
-        <Checkbox name="answers" value="2" labelName="Byzantium"/>
-        <Checkbox name="answers" value="3" labelName="Alexandria"/>
+        <h1 class="subtitle-font"><span v-show="showQuestionNumber">Q{{questionNumber}}.</span>{{question}}</h1>
+        <h2 class="body-text">{{questionContext}}</h2>
+        <Checkbox class="first-box" name="answers" value="1" :labelName="label1" ref="checkboxRef"/>
+        <Checkbox name="answers" value="2" :labelName="label2"/>
+        <Checkbox name="answers" value="3" :labelName="label3"/>
     </div>
 </template>
 
@@ -17,6 +17,10 @@ export default {
         Checkbox
     },
     props:{
+        showQuestionNumber: {
+            default: true,
+            type: Boolean
+        },
         question:{
             default: "Question Placeholder",
             type: String
@@ -24,19 +28,44 @@ export default {
         questionContext:{
             default: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor est voluptate enim, atque provident explicabo. Velit voluptate molestiae doloribus fugit! Laudantium soluta, nam atque earum quos expedita voluptates hic dolore excepturi veritatis voluptatibus eveniet explicabo laboriosam enim ex eos cumque voluptas quibusdam est temporibus suscipit a necessitatibus. Beatae commodi esse ducimus, distinctio quae maiores facilis perferendis laboriosam, omnis reprehenderit veritatis.",
             type: String
+        },
+
+        label1:{
+            default: "Option 1",
+            type: String
+        },
+        label2:{
+            default: "Option 2",
+            type: String
+        },
+        label3: {
+            default: "Option 3",
+            type: String
         }
     },
     data(){
         return {
-            getSelectedAnswer(){
-                let answers = this.$el.querySelectorAll('input[type=radio]');
-                answers = [...answers]
-                let answer = answers.filter(function(ele){
-                    return ele.checked;
-                })[0];
-
-                console.log(parseInt(answer.value));
-            }
+            questionNumber: 0
+        }
+    },
+    methods: {
+        //this method returns null if no option is selected or either 1,2,3 depending on the option selected.
+        getSelectedAnswer(){
+            let answers = this.$el.querySelectorAll('input[type=radio]');
+            answers = [...answers]
+            let answer = answers.filter(function(ele){
+                return ele.checked;
+            });
+            answer = answer.map(function(ele){
+                return parseInt(ele.value);
+            })
+            answer = answer[0] || null;
+            return answer;
+        }
+    },
+    watch: {
+        question(){
+            this.questionNumber = this.questionNumber + 1;
         }
     }
 }

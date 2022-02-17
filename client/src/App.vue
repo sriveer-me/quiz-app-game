@@ -4,7 +4,12 @@
         <TopBar />
         <LeftBar />
         <div class="content-area">
-            <MCQ ref="questionRef"/>
+            <MCQ
+                :showQuestionNumber="gameStarted"
+                :question="question" :questionContext="questionContext" 
+                :label1="option1" :label2="option2" :label3="option3"
+                ref="questionRef"
+            />
         </div>
         <div class="next-button" @click="nextClicked">
             <h1 class="subtitle-font light-color">Next</h1>
@@ -124,7 +129,14 @@ export default {
         return{
             isMobile: true,
             isTablet: false,
-            isDesktop: false
+            isDesktop: false,
+
+            gameStarted: false,
+            question: "this is a test question",
+            questionContext: "this is a test question context",
+            option1: "option-1",
+            option2: "option-2 ",
+            option3: "option-3"
         }
     },
     methods:{
@@ -148,12 +160,25 @@ export default {
         },
 
         nextClicked(){
-            this.$refs.questionRef.getSelectedAnswer();
+            let selectedAnswer = this.$refs.questionRef.getSelectedAnswer();
+            console.log(selectedAnswer)
+            // this.question = "next " + this.question;
+            // this.questionContext = "next " + this.questionContext;
+            // this.option1 = "next " + this.option1;
+            // this.option2 = "next " + this.option2;
+            // this.option3 = "next " + this.option3;
         }
     },
      created(){
         this.checkDevice();
         window.addEventListener('resize',this.checkDevice.bind(this));
+
+        this.question = "the objective of the game is to achieve a score of 10 as quickly as possible"
+        this.questionContext = "The game is played by selecting one of the three options given below for each question. Each right option gives the player plus 1 point while each wrong option gives the player -1 point.  Score can never go below zero. The game ends when the player successfully reaches 10 points. Questions are asked in bold on the top and this paragraph generally contains a small snipet elucidating the context of the question. The highest scores from around  the world are stored in our server for everyone to see. Achieve a high score by gaining a score of 10 in the shortest possible time with few mistakes as possible."
+
+        this.option1 = "Easy"
+        this.option2 = "Aurelian"
+        this.option3 = "Majorian"
     }
 }
 </script>
