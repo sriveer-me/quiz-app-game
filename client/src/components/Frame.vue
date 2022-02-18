@@ -4,8 +4,9 @@
         <TopBar :timerValue="gameTimeString" :gameScore="gameScore"/>
         <LeftBar />
         <div class="content-area">
-            <transition enter-active-class="animate__fadeIn" enter-leave-class="animate__fadeOut">
-                <MCQ
+            <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster">
+                <MCQ 
+                    v-if="showQuestion"
                     :showQuestionNumber="gameStarted"
                     :question="question" :questionContext="questionContext" 
                     :label1="option1" :label2="option2" :label3="option3"
@@ -240,6 +241,10 @@ export default {
             this.option2 = easyQuestions[randNumber].options[1];
             this.option3 = easyQuestions[randNumber].options[2];
             this.correctOption = easyQuestions[randNumber].correctOption;
+
+            setTimeout(function(){
+                this.showQuestion = true;
+            }.bind(this),2000)
         },
 
         randomNumberInRange(min, max) {
