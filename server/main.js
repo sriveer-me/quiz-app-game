@@ -4,8 +4,11 @@ const path = require('path');
 const highScoreFilePath = path.join(__dirname,"./highScores.json")
 
 let express = require('express');
+var cors = require('cors');
+
 const app = express();
 app.use(express.json()); //Used to parse JSON bodies
+app.use(cors())
 
 let port = process.env.PORT || 5000;
 app.listen(port,function(){

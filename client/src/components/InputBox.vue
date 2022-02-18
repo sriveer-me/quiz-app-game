@@ -63,7 +63,17 @@ export default {
                 this.state = "loading"
             }.bind(this),2000)
 
-			
+			let config = {
+				headers: {'Access-Control-Allow-Origin': '*'}
+			};
+			axios
+				.get('https://quiz-app-server-empyrean.herokuapp.com/',config)
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				})
 
 			// setTimeout(function(){
 			// 	this.state = "transition"
