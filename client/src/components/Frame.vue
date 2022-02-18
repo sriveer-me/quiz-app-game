@@ -8,7 +8,7 @@
                 <MCQ 
                     v-if="showQuestion"
                     :showQuestionNumber="gameStarted"
-                    :question="question" :questionContext="questionContext" 
+                    :question="question" :questionContext="questionContext" :questionNumber="gameQuestionNumber"
                     :label1="option1" :label2="option2" :label3="option3"
                     ref="questionRef"
                 />
@@ -161,6 +161,7 @@ export default {
             gameTimer: new Timer(),
             gameTimeString: "00:00",
             gameScore: 0,
+            gameQuestionNumber: 0,
 
             showQuestion: true,
             question: "this is a test question",
@@ -207,10 +208,8 @@ export default {
                 }
                 
                 //start the game here
-                this.gameTimer.reset();
-                this.updateQuestion();
-                this.$refs.questionRef.clearSelection();
-                this.gameStarted = true;
+                this.startGame();
+                return;
             }
 
             //game is running.. 
@@ -227,12 +226,20 @@ export default {
             this.$refs.questionRef.clearSelection();
             this.updateQuestion();
         },
+        startGame(){
+            this.gameTimer.reset();
+            this.gameQuestionNumber = 0;
+            this.updateQuestion();
+            this.$refs.questionRef.clearSelection();
+            this.gameStarted = true;
+        },
         endGame(){
             console.log('game end')
         },
 
         updateQuestion(){
             this.showQuestion = false;
+            this.gameQuestionNumber = this.gameQuestionNumber + 1;
 
             let randNumber = parseInt(this.randomNumberInRange(0,easyQuestions.length));
             this.question = easyQuestions[randNumber].question;

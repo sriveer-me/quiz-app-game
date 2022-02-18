@@ -21,6 +21,11 @@ export default {
             default: true,
             type: Boolean
         },
+        questionNumber:{
+            default: 0,
+            type: Number
+        },
+
         question:{
             default: "Question Placeholder",
             type: String
@@ -45,7 +50,6 @@ export default {
     },
     data(){
         return {
-            questionNumber: 0,
             checkboxes: []
         }
     },
@@ -73,11 +77,6 @@ export default {
             this.$refs.checkbox1.clear();
             this.$refs.checkbox2.clear();
             this.$refs.checkbox3.clear();
-        }
-    },
-    watch: {
-        question(){
-            this.questionNumber = this.questionNumber + 1;
         }
     }
 }
