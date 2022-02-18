@@ -1,7 +1,7 @@
 <template>
     <div class="input-box">
         <fieldset class="material">
-                <input type="text" autocomplete="off" required class="body-text strong-font">
+                <input type="text" autocomplete="off" required class="body-text strong-font" v-model="name">
                 <hr>
                 <label class="body-text">Your Name</label>
         </fieldset>
@@ -63,18 +63,22 @@ export default {
                 this.state = "loading"
             }.bind(this),2000)
 
-			setTimeout(function(){
-				this.state = "transition"
-			}.bind(this),5000)
+			
 
-			setTimeout(function(){
-				this.state = "finished"
-			}.bind(this),7000)
+			// setTimeout(function(){
+			// 	this.state = "transition"
+			// }.bind(this),5000)
+
+			// setTimeout(function(){
+			// 	this.state = "finished"
+			// }.bind(this),7000)
         }
     },
-    beforeMount(){
-        // this.icon = ReadyIcon;
-    }
+    watch:{
+		name(newValue){
+			this.$emit('inputName:changed',newValue);
+		}
+	}
 }
 </script>
 
@@ -84,6 +88,7 @@ export default {
 .input-box{
     position: relative;
     display: flex;
+	margin: auto;
 }
 .icon-box{
     cursor: pointer;

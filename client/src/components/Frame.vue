@@ -13,6 +13,9 @@
                     ref="questionRef"
                 />
             </transition>
+            <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster">
+                <InputBox v-show="showInputBox"/>
+            </transition>
         </div>
         <div class="next-button" @click="nextClicked">
             <h1 class="subtitle-font light-color">Next</h1>
@@ -112,6 +115,7 @@ import {isMobile,isTablet,isDesktop} from '@/js/breakpoints.js';
 import TopBar from '@/components/TopBar.vue';
 import LeftBar from '@/components/LeftBar.vue';
 import MCQ from '@/components/MultipleChoiceQuestion.vue';
+import InputBox from '@/components/InputBox.vue';
 
 import {Icon} from '@vicons/utils';
 import ArrowRight from '@vicons/fa/ArrowRight';
@@ -146,6 +150,7 @@ export default {
         TopBar,
         LeftBar,
         MCQ,
+        InputBox,
 
         Icon,
         ArrowRight,
@@ -158,12 +163,14 @@ export default {
             isDesktop: false,
 
             gameStarted: false,
+            gameEnded: false,
             gameTimer: new Timer(),
             gameTimeString: "00:00",
             gameScore: 0,
             gameQuestionNumber: 0,
 
             showQuestion: true,
+            showInputBox: false,
             question: "this is a test question",
             questionContext: "this is a test question context",
             option1: "option-1",
@@ -222,9 +229,11 @@ export default {
             else if(this.gameScore != 0)
                 this.gameScore--;
 
-            //step-2 update to new question
-            this.$refs.questionRef.clearSelection();
-            this.updateQuestion();
+            //step-2 update to new question if game did not end
+            if(!this.gameEnded){
+                this.$refs.questionRef.clearSelection();
+                this.updateQuestion();
+            }
         },
         startGame(){
             this.gameTimer.reset();
@@ -234,7 +243,21 @@ export default {
             this.gameStarted = true;
         },
         endGame(){
-            console.log('game end')
+            this.gameEnded = true;
+            this.gameTimer.stop();
+
+            this.showQuestion = false;
+            setTimeout(function(){
+                this.showInputBox = true;
+            }.bind(this),500);
+            
+
+
+            // this.question = "Congratulations!! On Achieving 10 points and Finishing The Game"
+            // this.questionContext = easyQuestions[randNumber].questionContext;
+            // this.option1 = easyQuestions[randNumber].options[0];
+            // this.option2 = easyQuestions[randNumber].options[1];
+            // this.option3 = easyQuestions[randNumber].options[2];
         },
 
         updateQuestion(){
