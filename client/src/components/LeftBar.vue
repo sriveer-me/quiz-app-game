@@ -1,13 +1,13 @@
 <template>
     <div class="left-bar">
         <div class="icon-box">
-            <Icon size="32" color="#514A4A">
+            <Icon color="#514A4A" class="left-bar-icon">
                 <Linkedin />
             </Icon>
-            <Icon size="32" color="#514A4A">
+            <Icon color="#514A4A" class="left-bar-icon">
                 <FirefoxBrowser />
             </Icon>
-            <Icon size="32" color="#514A4A">
+            <Icon color="#514A4A" class="left-bar-icon">
                 <Github />
             </Icon>
         </div>
@@ -36,6 +36,15 @@
         row-gap: var(--spacing-large);
         
         margin-bottom: var(--spacing-larger);
+    }
+
+    .left-bar-icon{
+        transition: font-size 0.5s ease-in-out;
+        font-size: 32px;
+        cursor: pointer;
+    }
+    .left-bar-icon:hover{
+        font-size: 64px;
     }
 </style>
 
