@@ -14,7 +14,11 @@
                 />
             </transition>
             <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster">
-                <InputBox v-show="showInputBox"/>
+                <InputBox 
+                    v-show="showInputBox" 
+                    @inputName:changed="inputNameChanged" @input:submit="nameSubmited"
+                    ref="inputBoxComp"
+                />
             </transition>
         </div>
         <div class="next-button" @click="nextClicked">
@@ -127,6 +131,8 @@ import { Timer } from "easytimer.js";
 
 import {easyQuestions} from '@/json/Questions.js';
 
+import {getHighScores,postScore} from '@/js/serverCommunication.js'
+
 const renderMessage = (props) => {
   const { type } = props;
   return h(NAlert, {
@@ -169,6 +175,8 @@ export default {
             gameScore: 0,
             gameQuestionNumber: 0,
 
+            playerName: "noName",
+
             showQuestion: true,
             showInputBox: false,
             question: "this is a test question",
@@ -182,6 +190,36 @@ export default {
         }
     },
     methods:{
+        calculateScore(){
+            let baseScore = 10000;
+
+            let timeTaken = this.gameTimer.getTimeValues().minutes * 60;
+            timeTaken = timeTaken + this.gameTimer.getTimeValues().seconds;
+
+            let questionsPenalty = this.gameQuestionNumber - 10;
+
+            baseScore = baseScore - (timeTaken * 20) - (questionsPenalty * 100);
+
+            if(baseScore < 0)
+                baseScore = 0;
+
+            console.log(`calculated baseScore : ${baseScore}`);
+
+            return baseScore;
+
+        },
+
+        inputNameChanged(newValue){
+            this.playerName = newValue;
+        },
+        async nameSubmited(){
+            await postScore({
+                name: this.playerName,
+                score: this.calculateScore()
+            });
+
+            this.$refs.inputBoxComp.setFinished();
+        },
         checkDevice(){
             if(isMobile() === true){
                 this.isMobile = true;

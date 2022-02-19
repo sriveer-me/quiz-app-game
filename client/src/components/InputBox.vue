@@ -88,30 +88,23 @@ export default {
 				return;
 			}
 
-
-			if(this.submit === false){
-				this.submit = true;
-				
-			}
-
-            // this.state = "transition";
-            // setTimeout(function(){
-            //     this.state = "loading"
-            // }.bind(this),2000)
-
-			// let config = {
-			// 	headers: {'Access-Control-Allow-Origin': '*'}
-			// };
+			if(this.submit === true)
+				return;
 			
+			this.submit = true;
+			this.$emit("input:submit");
 
-			// setTimeout(function(){
-			// 	this.state = "transition"
-			// }.bind(this),5000)
-
-			// setTimeout(function(){
-			// 	this.state = "finished"
-			// }.bind(this),7000)
-        }
+            this.state = "transition";
+            setTimeout(function(){
+                this.state = "loading"
+            }.bind(this),2000)
+        },
+		setFinished(){
+			this.state = "transition"
+			setTimeout(function(){
+				this.state = "finished"
+			}.bind(this),2000)
+		}
     },
     watch:{
 		name(newValue){
