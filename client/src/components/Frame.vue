@@ -250,11 +250,11 @@ export default {
                 }
                 else if(selectedAnswer === 2){
                     //redirect to my personal website for now.
-
+                    window.location.href = "https://veeru-portfolio.netlify.app/";
                 }
                 else if(selectedAnswer === 3){
                     //open a modal to show off the leaderboards
-
+                    
                 }
                 return;
             }
