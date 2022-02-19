@@ -8,8 +8,8 @@
         <div class="icon-box">
             
             <Transition
-                enter-active-class="animate__animated animate__fadeInLeft"
-                leave-active-class="animate__animated animate__fadeOutRight"
+                enter-active-class="animate__animated animate__fadeInLeft animate__faster"
+                leave-active-class="animate__animated animate__fadeOutRight animate__faster"
             >
                 <Icon size="64" color="#514A4A" class="go-button" v-show="state === 'ready'" @click="goClicked">
                     <ArrowRight />
@@ -17,15 +17,15 @@
             </Transition>
 
             <Transition
-                enter-active-class="animate__animated animate__fadeInLeft"
-                leave-active-class="animate__animated animate__fadeOutRight"
+                enter-active-class="animate__animated animate__fadeInLeft animate__faster"
+                leave-active-class="animate__animated animate__fadeOutRight animate__faster"
             >
                 <LoadingIcon v-show="state === 'loading'"/>
             </Transition>
 
 			<Transition
-                enter-active-class="animate__animated animate__fadeIn"
-                leave-active-class="animate__animated animate__fadeOutRight"
+                enter-active-class="animate__animated animate__fadeIn animate__faster"
+                leave-active-class="animate__animated animate__fadeOutRight animate__faster"
             >
                 <Icon size="64" color="#514A4A" class="go-button" v-show="state === 'finished'" @click="goClicked">
                     <FinishedIcon />
@@ -97,14 +97,13 @@ export default {
             this.state = "transition";
             setTimeout(function(){
                 this.state = "loading"
-            }.bind(this),2000)
+            }.bind(this),500)
         },
 		setFinished(){
 			this.state = "transition"
 			setTimeout(function(){
-				console.log('setting state to finish')
 				this.state = "finished"
-			}.bind(this),2000)
+			}.bind(this),500)
 		}
     },
     watch:{

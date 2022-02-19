@@ -219,6 +219,10 @@ export default {
             });
 
             this.$refs.inputBoxComp.setFinished();
+            this.showInputBox = false;
+            setTimeout(function(){
+                this.showQuestion = true;
+            }.bind(this),2000)
         },
         checkDevice(){
             if(isMobile() === true){
@@ -311,15 +315,14 @@ export default {
             this.gameTimer.stop();
 
             this.showQuestion = false;
-            console.log('game ended ')
-            // let highScores = await getHighScores();
+            let highScores = await getHighScores();
                 
-            // this.question = "Congratulations!! On Achieving 10 points and Finishing The Game"
-            // this.questionContext = `Your rank has been posted on the global leaderboards. The current AUGUSTUS on the leaderboards is ${highScores[0].name} with a score of ${highScores[0].score}. The title CEASER is held by ${highScores[1].name} with a score of ${highScores[1].score}. PRAETORIAN PREFECT ${highScores[2].name} has ${highScores[2].score} points.`
+            this.question = "Congratulations!! On Achieving 10 points and Finishing The Game"
+            this.questionContext = `Your rank has been posted on the global leaderboards. The current AUGUSTUS on the leaderboards is ${highScores[0].name} with a score of ${highScores[0].score}. The title CEASER is held by ${highScores[1].name} with a score of ${highScores[1].score}. PRAETORIAN PREFECT ${highScores[2].name} has ${highScores[2].score} points.`
 
-            // this.option1 = "Retry"
-            // this.option2 = "Contact Dev"
-            // this.option3 = "Leaderboard"
+            this.option1 = "Retry"
+            this.option2 = "Contact Dev"
+            this.option3 = "Leaderboard"
 
             setTimeout(function(){
                 this.showInputBox = true;
