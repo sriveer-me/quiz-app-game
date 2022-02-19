@@ -42,6 +42,26 @@ import ArrowRight from '@vicons/material/ArrowRightAltSharp';
 import LoadingIcon from '@/components/LoadingIcon.vue';
 import FinishedIcon from '@vicons/fa/CheckCircle';
 
+import { defineComponent, h } from "vue";
+import { NAlert, useMessage } from "naive-ui";
+
+const renderMessage = (props) => {
+  const { type } = props;
+  return h(NAlert, {
+    closable: props.closable,
+    onClose: props.onClose,
+    type: type === "loading" ? "default" : type,
+    title: "Please Fill In The Required Credentials",
+    style: {
+      boxShadow: "var(--n-box-shadow)",
+      maxWidth: "calc(100vw - 32px)",
+      width: "480px"
+    }
+  }, {
+    default: () => props.content
+  });
+};
+
 export default {
     name: "InputBox",
     components:{
@@ -53,27 +73,36 @@ export default {
     data(){
         return {
             name: "noName",
-            state: "ready"
+            state: "ready",
+			submit: false,
         }
     },
     methods:{
         goClicked(){
-            this.state = "transition";
-            setTimeout(function(){
-                this.state = "loading"
-            }.bind(this),2000)
+			console.log('go clicked')
+			if(this.name === ""){
+				this.message.error('Your name has to be entered for the results to be posted to the server.',{
+                        render: renderMessage,
+                        closable: true
+                    });
+				return;
+			}
 
-			let config = {
-				headers: {'Access-Control-Allow-Origin': '*'}
-			};
-			axios
-				.get('https://quiz-app-server-empyrean.herokuapp.com/',config)
-				.then(function (response) {
-					console.log(response);
-				})
-				.catch(function (error) {
-					console.log(error);
-				})
+
+			if(this.submit === false){
+				this.submit = true;
+				
+			}
+
+            // this.state = "transition";
+            // setTimeout(function(){
+            //     this.state = "loading"
+            // }.bind(this),2000)
+
+			// let config = {
+			// 	headers: {'Access-Control-Allow-Origin': '*'}
+			// };
+			
 
 			// setTimeout(function(){
 			// 	this.state = "transition"
@@ -88,6 +117,10 @@ export default {
 		name(newValue){
 			this.$emit('inputName:changed',newValue);
 		}
+	},
+	created(){
+		console.log('input box cretaed');
+		this.message = useMessage();
 	}
 }
 </script>

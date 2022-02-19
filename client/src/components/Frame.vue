@@ -240,6 +240,9 @@ export default {
             this.gameQuestionNumber = 0;
             this.updateQuestion();
             this.$refs.questionRef.clearSelection();
+
+            this.gameScore = 9
+
             this.gameStarted = true;
         },
         endGame(){
