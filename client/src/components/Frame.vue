@@ -241,7 +241,30 @@ export default {
 
         nextClicked(){
             let selectedAnswer = this.$refs.questionRef.getSelectedAnswer();
-            // console.log(selectedAnswer)
+            
+            if(this.gameEnded === true){
+                if(selectedAnswer === null){
+                    this.message.error('An option has to be selected Here. please try selecting a relevant option using the checkboxes provided.',{
+                        render: renderMessage,
+                        closable: true
+                    })
+                    return;
+                }
+
+                if(selectedAnswer === 1){
+                    //the option retry is selected initialize the game
+
+                }
+                if(selectedAnswer === 2){
+                    //redirect to my personal website for now.
+
+                }
+                if(selectedAnswer === 3){
+                    //open a modal to show off the leaderboards
+
+                }
+                return;
+            }
 
             if(this.gameStarted === false){
                 if(selectedAnswer === null){
@@ -260,18 +283,18 @@ export default {
             //game is running.. 
             //step-1 calculate score
             if(selectedAnswer === this.correctOption){
-                if(this.gameScore === 9)
+                if(this.gameScore === 9){
                     this.endGame();
+                    return;
+                }
                 else this.gameScore++;
             }
             else if(this.gameScore != 0)
                 this.gameScore--;
 
             //step-2 update to new question if game did not end
-            if(!this.gameEnded){
-                this.$refs.questionRef.clearSelection();
-                this.updateQuestion();
-            }
+            this.$refs.questionRef.clearSelection();
+            this.updateQuestion();
         },
         startGame(){
             this.gameTimer.reset();
@@ -283,22 +306,24 @@ export default {
 
             this.gameStarted = true;
         },
-        endGame(){
+        async endGame(){
             this.gameEnded = true;
             this.gameTimer.stop();
 
             this.showQuestion = false;
+            console.log('game ended ')
+            // let highScores = await getHighScores();
+                
+            // this.question = "Congratulations!! On Achieving 10 points and Finishing The Game"
+            // this.questionContext = `Your rank has been posted on the global leaderboards. The current AUGUSTUS on the leaderboards is ${highScores[0].name} with a score of ${highScores[0].score}. The title CEASER is held by ${highScores[1].name} with a score of ${highScores[1].score}. PRAETORIAN PREFECT ${highScores[2].name} has ${highScores[2].score} points.`
+
+            // this.option1 = "Retry"
+            // this.option2 = "Contact Dev"
+            // this.option3 = "Leaderboard"
+
             setTimeout(function(){
                 this.showInputBox = true;
             }.bind(this),500);
-            
-
-
-            // this.question = "Congratulations!! On Achieving 10 points and Finishing The Game"
-            // this.questionContext = easyQuestions[randNumber].questionContext;
-            // this.option1 = easyQuestions[randNumber].options[0];
-            // this.option2 = easyQuestions[randNumber].options[1];
-            // this.option3 = easyQuestions[randNumber].options[2];
         },
 
         updateQuestion(){

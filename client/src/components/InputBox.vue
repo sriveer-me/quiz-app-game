@@ -102,6 +102,7 @@ export default {
 		setFinished(){
 			this.state = "transition"
 			setTimeout(function(){
+				console.log('setting state to finish')
 				this.state = "finished"
 			}.bind(this),2000)
 		}
