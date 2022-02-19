@@ -257,13 +257,13 @@ export default {
 
                 if(selectedAnswer === 1){
                     //the option retry is selected initialize the game
-
+                    this.startGame();
                 }
-                if(selectedAnswer === 2){
+                else if(selectedAnswer === 2){
                     //redirect to my personal website for now.
 
                 }
-                if(selectedAnswer === 3){
+                else if(selectedAnswer === 3){
                     //open a modal to show off the leaderboards
 
                 }
@@ -309,6 +309,7 @@ export default {
             this.gameScore = 9
 
             this.gameStarted = true;
+            this.gameEnded = false;
         },
         async endGame(){
             this.gameEnded = true;

@@ -102,7 +102,8 @@ export default {
 		setFinished(){
 			this.state = "transition"
 			setTimeout(function(){
-				this.state = "finished"
+				this.state = "ready"
+				this.submit=false;
 			}.bind(this),500)
 		}
     },
