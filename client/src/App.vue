@@ -9,6 +9,7 @@
 <script>
     import { NMessageProvider,NConfigProvider } from 'naive-ui'
     import Frame from '@/components/Frame.vue'
+    import {getHighScores} from '@/js/serverCommunication.js';
 
     const themeOverrides = {
         common: {
@@ -27,6 +28,10 @@
             return{
                 themeOverrides
             }
+        },
+        async created(){
+            await getHighScores();
+            console.log('back-end server working');
         }
     }
 </script>

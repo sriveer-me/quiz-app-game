@@ -299,7 +299,7 @@ export default {
             this.updateQuestion();
             this.$refs.questionRef.clearSelection();
 
-            this.gameScore = 9
+            this.gameScore = 0
 
             this.gameStarted = true;
             this.gameEnded = false;
