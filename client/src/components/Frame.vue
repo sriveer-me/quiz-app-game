@@ -212,18 +212,7 @@ export default {
         inputNameChanged(newValue){
             this.playerName = newValue;
         },
-        async nameSubmited(){
-            await postScore({
-                name: this.playerName,
-                score: this.calculateScore()
-            });
-
-            this.$refs.inputBoxComp.setFinished();
-            this.showInputBox = false;
-            setTimeout(function(){
-                this.showQuestion = true;
-            }.bind(this),2000)
-        },
+        
         checkDevice(){
             if(isMobile() === true){
                 this.isMobile = true;
@@ -316,6 +305,17 @@ export default {
             this.gameTimer.stop();
 
             this.showQuestion = false;
+            
+            setTimeout(function(){
+                this.showInputBox = true;
+            }.bind(this),500);
+        },
+        async nameSubmited(){
+            await postScore({
+                name: this.playerName,
+                score: this.calculateScore()
+            });
+
             let highScores = await getHighScores();
                 
             this.question = "Congratulations!! On Achieving 10 points and Finishing The Game"
@@ -325,9 +325,11 @@ export default {
             this.option2 = "Contact Dev"
             this.option3 = "Leaderboard"
 
+            this.$refs.inputBoxComp.setFinished();
+            this.showInputBox = false;
             setTimeout(function(){
-                this.showInputBox = true;
-            }.bind(this),500);
+                this.showQuestion = true;
+            }.bind(this),2000)
         },
 
         updateQuestion(){

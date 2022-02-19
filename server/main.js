@@ -46,7 +46,7 @@ app.post('/score',function(req,res){
         }
     }
 
-    if(highScores.length > 5);
+    if(highScores.length > 5)
         highScores.pop();
 
     setHighScores(highScores);
