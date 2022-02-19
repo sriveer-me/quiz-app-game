@@ -1,5 +1,6 @@
 <template>
     <div class="frame">
+        <Leaderboard :highScores="highScores" ref="leaderboardModal"/>
         <h1 class="icon-area icon-font">QZ</h1>
         <TopBar :timerValue="gameTimeString" :gameScore="gameScore"/>
         <LeftBar />
@@ -120,6 +121,7 @@ import TopBar from '@/components/TopBar.vue';
 import LeftBar from '@/components/LeftBar.vue';
 import MCQ from '@/components/MultipleChoiceQuestion.vue';
 import InputBox from '@/components/InputBox.vue';
+import Leaderboard from '@/components/Leaderboard.vue';
 
 import {Icon} from '@vicons/utils';
 import ArrowRight from '@vicons/fa/ArrowRight';
@@ -157,6 +159,7 @@ export default {
         LeftBar,
         MCQ,
         InputBox,
+        Leaderboard,
 
         Icon,
         ArrowRight,
@@ -174,6 +177,7 @@ export default {
             gameTimeString: "00:00",
             gameScore: 0,
             gameQuestionNumber: 0,
+            highScores: null,
 
             playerName: "noName",
 
@@ -254,7 +258,7 @@ export default {
                 }
                 else if(selectedAnswer === 3){
                     //open a modal to show off the leaderboards
-                    
+                    this.$refs.leaderboardModal.show();
                 }
                 return;
             }
@@ -317,6 +321,7 @@ export default {
             });
 
             let highScores = await getHighScores();
+            this.highScores = highScores;
                 
             this.question = "Congratulations!! On Achieving 10 points and Finishing The Game"
             this.questionContext = `Your rank has been posted on the global leaderboards. The current AUGUSTUS on the leaderboards is ${highScores[0].name} with a score of ${highScores[0].score}. The title CEASER is held by ${highScores[1].name} with a score of ${highScores[1].score}. PRAETORIAN PREFECT ${highScores[2].name} has ${highScores[2].score} points.`
