@@ -305,6 +305,7 @@ export default {
             this.gameEnded = false;
         },
         async endGame(){
+            this.gameStarted = false;
             this.gameEnded = true;
             this.gameTimer.stop();
 
